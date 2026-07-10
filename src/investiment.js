@@ -57,12 +57,12 @@ export function calculateRequiredContribution(
       previousMonth.totalAmount + interestReturn + monthlyContribution;
 
     returnsArray.push({
-      investedAmount,
-      monthlyContribution,
-      interestReturn,
-      totalInterestReturns,
+      investedAmount: Number(investedAmount.toFixed(2)),
+      monthlyContribution: Number(monthlyContribution.toFixed(2)),
+      interestReturn: Number(interestReturn.toFixed(2)),
+      totalInterestReturns: Number(totalInterestReturns.toFixed(2)),
       month,
-      totalAmount,
+      totalAmount: Number(totalAmount.toFixed(2)),
     });
   }
 

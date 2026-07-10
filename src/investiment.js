@@ -2,7 +2,7 @@ function convertToMontlyReturnRate(yearlyReturnRate) {
   return yearlyReturnRate ** (1 / 12);
 }
 
-function calculateRequiredContribution(
+export function calculateRequiredContribution(
   goalFinancial = 0,
   startingAmount = 0,
   timeHorizon = 0,
@@ -10,9 +10,9 @@ function calculateRequiredContribution(
   returnRate = 0,
   returnTimeFrame = "monthly",
 ) {
-  if (!timeHorizon || !startingAmount) {
+  if (!goalFinancial || !timeHorizon || !returnRate) {
     throw new Error(
-      "Investimento inicial e prazo devem ser preenchidos com valores positivos",
+      "Meta financeira, prazo e rentabilidade devem ser preenchidos",
     );
   }
   const monthlyRate =
@@ -32,16 +32,16 @@ function calculateRequiredContribution(
   };
   const returnsArray = [referenceInvestimentObject];
 
-  // Quanto seu dinheiro atual vai virar sozinho
   const futureInitialAmount =
     startingAmount * (1 + monthlyRate) ** finalTimeMonth;
 
-  // Quanto falta alcançar
   const remainingAmount = goalFinancial - futureInitialAmount;
 
-  // Aporte mensal necessário
   const monthlyContribution =
-    remainingAmount * (monthlyRate / ((1 + monthlyRate) ** finalTimeMonth - 1));
+    monthlyRate === 0
+      ? remainingAmount / finalTimeMonth
+      : remainingAmount *
+        (monthlyRate / ((1 + monthlyRate) ** finalTimeMonth - 1));
 
   for (let month = 1; month <= finalTimeMonth; month++) {
     const previousMonth = returnsArray[month - 1];
@@ -58,6 +58,7 @@ function calculateRequiredContribution(
 
     returnsArray.push({
       investedAmount,
+      monthlyContribution,
       interestReturn,
       totalInterestReturns,
       month,

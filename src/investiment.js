@@ -24,6 +24,7 @@ export function calculateRequiredContribution(
     timePeriod === "monthly" ? timeHorizon : timeHorizon * 12;
 
   const referenceInvestimentObject = {
+    previousInvestedAmount: startingAmount,
     investedAmount: startingAmount,
     interestReturn: 0,
     totalInterestReturns: 0,
@@ -45,6 +46,7 @@ export function calculateRequiredContribution(
 
   for (let month = 1; month <= finalTimeMonth; month++) {
     const previousMonth = returnsArray[month - 1];
+    const previousInvestedAmount = previousMonth.investedAmount;
 
     const investedAmount = previousMonth.investedAmount + monthlyContribution;
 
@@ -57,6 +59,7 @@ export function calculateRequiredContribution(
       previousMonth.totalAmount + interestReturn + monthlyContribution;
 
     returnsArray.push({
+      previousInvestedAmount: Number(previousInvestedAmount.toFixed(2)),
       investedAmount: Number(investedAmount.toFixed(2)),
       monthlyContribution: Number(monthlyContribution.toFixed(2)),
       interestReturn: Number(interestReturn.toFixed(2)),

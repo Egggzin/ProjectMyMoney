@@ -57,6 +57,8 @@ function renderProgression(evt) {
       ],
     },
     options: {
+      responsive: true,
+      maintainAspectRatio: false,
       scales: {
         y: {
           beginAtZero: true,
@@ -70,31 +72,25 @@ function renderProgression(evt) {
       labels: returnsArray.map((investimentObject) => investimentObject.month),
       datasets: [
         {
-          label: "Patrimônio total",
-          data: returnsArray.map((item) => item.totalAmount),
-          borderColor: "#2563eb",
-          backgroundColor: "transparent",
-          borderWidth: 4,
-          pointRadius: 0,
-          hoverRadius: 5,
-          tension: 0.3,
-        },
-        {
           label: "Total investido",
-          data: returnsArray.map((item) => item.investedAmount),
-          borderColor: "#ec4899",
-          backgroundColor: "transparent",
-          borderWidth: 2,
+          data: returnsArray.map((item) => item.previousInvestedAmount),
+          backgroundColor: "#3D95D3",
           pointRadius: 0,
           hoverRadius: 5,
           tension: 0.3,
         },
         {
-          label: "Juros acumulados",
+          label: "Aporte mensal",
+          data: returnsArray.map((item) => item.monthlyContribution),
+          backgroundColor: "#e6cb52",
+          pointRadius: 0,
+          hoverRadius: 5,
+          tension: 0.3,
+        },
+        {
+          label: "Rendimento",
           data: returnsArray.map((item) => item.totalInterestReturns),
-          borderColor: "#f59e0b",
-          backgroundColor: "transparent",
-          borderWidth: 2,
+          backgroundColor: "#FF4569",
           pointRadius: 0,
           hoverRadius: 5,
           tension: 0.3,
@@ -103,17 +99,13 @@ function renderProgression(evt) {
     },
     options: {
       responsive: true,
-      interaction: {
-        mode: "index",
-        intersect: false,
-      },
-      plugins: {
-        legend: {
-          position: "top",
-        },
-      },
+      maintainAspectRatio: false,
       scales: {
+        x: {
+          stacked: true,
+        },
         y: {
+          stacked: true,
           beginAtZero: true,
         },
       },

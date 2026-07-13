@@ -26,6 +26,7 @@ export function calculateRequiredContribution(
   const referenceInvestimentObject = {
     previousInvestedAmount: startingAmount,
     investedAmount: startingAmount,
+    monthlyContribution: 0,
     interestReturn: 0,
     totalInterestReturns: 0,
     month: 0,

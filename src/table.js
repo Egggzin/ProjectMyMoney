@@ -1,0 +1,57 @@
+const isNonEmptyArray = (arrayElement) => {
+  return Array.isArray(arrayElement) && arrayElement.length > 0;
+};
+export const createTable = (columsArray, dataArray, tableId) => {
+  if (
+    !isNonEmptyArray(columsArray) ||
+    !isNonEmptyArray(dataArray) ||
+    !tableId
+  ) {
+    throw new Error(
+      "Para a correta execução, precisamos de um array com as colunas, outro com as informações das linhas e também o id do elemento da tabela selecionada",
+    );
+  }
+  const tableElement = document.getElementById(tableId);
+  if (!tableElement || tableElement.nodeName !== "TABLE") {
+    throw new Error("ID informado não corresponde a nenhum elemento table");
+  }
+  createTableHeader(tableElement, columsArray);
+  createTableBody(tableElement, dataArray, columsArray);
+};
+
+function createTableHeader(tableReference, columsArray) {
+  function createTheadElement(tableReference) {
+    const thead = document.createElement("thead");
+    tableReference.appendChild(thead);
+    return thead;
+  }
+  const tableHeaderReference =
+    tableReference.querySelector("thead") ?? createTheadElement(tableReference);
+
+  const headerRow = document.createElement("tr");
+  for (const tableColumnObject of columsArray) {
+    const headerElement = /* html */ `<th class="text-center" >${tableColumnObject.columnLabel}</th>`;
+    headerRow.innerHTML += headerElement;
+  }
+  tableHeaderReference.appendChild(headerRow);
+}
+function createTableBody(tableReference, tableItems, columsArray) {
+  //   const tableBodyReference = tableReference.querySelector("tbody");
+  function createTbodyElement(tableReference) {
+    const tbody = document.createElement("tbody");
+    tableReference.appendChild(tbody);
+    return tbody;
+  }
+  const tableBodyReference =
+    tableReference.querySelector("tbody") ?? createTbodyElement(tableReference);
+
+  for (const [itemIndex, tableItem] of tableItems.entries()) {
+    const tableRow = document.createElement("tr");
+
+    for (const tableColumn of columsArray) {
+      const formatFn = tableColumn.format ?? ((info) => info);
+      tableRow.innerHTML += /*html*/ `<td class="text-center">${formatFn(tableItem[tableColumn.accessor])}</td>`;
+    }
+    tableBodyReference.appendChild(tableRow);
+  }
+}

@@ -27,7 +27,7 @@ function createTableHeader(tableReference, columsArray) {
   }
   const tableHeaderReference =
     tableReference.querySelector("thead") ?? createTheadElement(tableReference);
-
+  tableHeaderReference.innerHTML = "";
   const headerRow = document.createElement("tr");
   ["bg-blue-900", "text-slate-200", "sticky", "top-0"].forEach((cssClass) =>
     headerRow.classList.add(cssClass),
@@ -47,7 +47,7 @@ function createTableBody(tableReference, tableItems, columsArray) {
   }
   const tableBodyReference =
     tableReference.querySelector("tbody") ?? createTbodyElement(tableReference);
-
+  tableBodyReference.innerHTML = "";
   for (const [itemIndex, tableItem] of tableItems.entries()) {
     const tableRow = document.createElement("tr");
     if (itemIndex % 2 !== 0) {

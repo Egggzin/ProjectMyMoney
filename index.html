@@ -4,105 +4,116 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="/src/style.css" rel="stylesheet" />
-    <title>projectmymoney</title>
+    <title>Calculadora de metas</title>
   </head>
-  <body class="h-[100dvh] grid grid-cols-3 grid-rows-2">
+  <body class="h-[100dvh] grid grid-cols-4 grid-rows-2">
     <aside
-      class="px-2 py-5 justify-between flex flex-col bg-violet-950 row-span-2"
+      class="px-2 py-5 justify-between flex flex-col bg-gray-100 row-span-2 border border-gray-300"
     >
-      <h1 class="text-2xl font-bold px-6"></h1>
-      <form id="investiment-form" class="w-full px-6">
-        <div class="flex w-full flex-col my-2">
-          <label for="goal-financial" class="font-bold text-violet-300"
-            >Meta Financeira</label
-          >
-          <div class="flex">
-            <input
+      <div class="flex flex-col gap-5">
+        <div class="flex flex-col px-1">
+          <img
+            src="public/logo.icon.png"
+            alt="Logo Calculadora de metas"
+            class="size-20 object-contain pc"
+          />
+          <h1 class="text-2xl font-bold px-5">Calculadora de Metas</h1>
+        </div>
+        <form id="investiment-form" class="w-full px-6">
+          <div class="flex w-full flex-col my-2">
+            <label for="goal-financial" class="font-bold text-gray-500"
+              >Meta Final (R$)</label
+            >
+            <div class="flex">
+              <!-- <input
               value="R$"
               class="w-1/6 bg-violet-300 text-center rounded-l-lg"
               type="text"
               disabled
-            />
-            <input
-              type="text"
-              class="w-5/6 bg-white rounded-r-lg px-2"
-              id="goal-financial"
-              name="goal-financial"
-              required
-              placeholder="0.00"
-            />
+            /> -->
+              <input
+                type="text"
+                class="h-10 w-full bg-white rounded-lg px-2"
+                id="goal-financial"
+                name="goal-financial"
+                required
+                placeholder="0.00"
+              />
+            </div>
           </div>
-        </div>
-        <div class="flex w-full flex-col my-2">
-          <label for="initial-investment" class="font-bold text-violet-300"
-            >Patrimônio inicial</label
-          >
-          <div class="flex w-full">
-            <input
+          <div class="flex w-full flex-col my-2">
+            <label for="initial-investment" class="font-bold text-gray-500"
+              >Aporte Inicial (R$)</label
+            >
+            <div class="flex w-full">
+              <!-- <input
               value="R$"
               class="w-1/6 bg-violet-300 text-center rounded-l-lg"
               type="text"
               disabled
-            />
-            <input
-              type="text"
-              class="w-5/6 bg-white rounded-r-lg px-2"
-              id="initial-investment"
-              name="initial-investment"
-              placeholder="0.00"
-            />
+            /> -->
+              <input
+                type="text"
+                class="h-10 w-full bg-white rounded-lg px-2"
+                id="initial-investment"
+                name="initial-investment"
+                placeholder="0.00"
+              />
+            </div>
           </div>
-        </div>
-        <div class="flex w-full flex-col my-2">
-          <label for="time-amount" class="font-bold text-violet-300"
-            >Prazo</label
-          >
-          <div class="flex w-full">
-            <input
-              type="text "
-              class="w-2/3 bg-white rounded-l-lg px-2"
-              id="time-amount"
-              name="time-amount"
-              required
-            />
-            <select
+          <div class="flex w-full my-2 justify-between">
+            <div class="flex flex-col">
+              <label for="time-amount" class="font-bold text-gray-500"
+                >Prazo (Anos)</label
+              >
+              <div class="flex w-full">
+                <input
+                  type="text "
+                  class="h-10 bg-white rounded-lg px-2"
+                  id="time-amount"
+                  name="time-amount"
+                  required
+                />
+                <!-- <select
               class="w-1/3 bg-white text-center border-violet-950 border-l-2 rounded-r-lg hover:bg-violet-300 hover:text-violet-950 cursor-pointer"
               id="time-amount-period"
             >
               <option value="monthly">Mensal</option>
               <option value="yearly">Anual</option>
-            </select>
-          </div>
-        </div>
-        <div class="flex w-full flex-col my-2">
-          <label for="return-rate" class="font-bold text-violet-300"
-            >Rentabilidade</label
-          >
-          <div class="flex w-full">
-            <input
+            </select> -->
+              </div>
+            </div>
+            <div class="flex flex-col">
+              <label for="return-rate" class="font-bold text-gray-500"
+                >Juros (% A.A.)</label
+              >
+              <div class="flex w-full">
+                <!-- <input
               value="%"
               class="w-1/6 bg-violet-300 text-center rounded-l-lg"
               type="text"
               disabled
-            />
-            <input
-              type="text"
-              class="w-1/2 bg-white px-2"
-              id="return-rate"
-              name="return-rate"
-              required
-            />
-            <select
+            /> -->
+                <input
+                  type="text"
+                  class="h-10 bg-white rounded-lg px-2"
+                  id="return-rate"
+                  name="return-rate"
+                  required
+                />
+              </div>
+              <!-- <select
               class="w-1/3 bg-white text-center border-violet-950 border-l-2 rounded-r-lg hover:bg-violet-300 hover:text-violet-950 cursor-pointer"
               id="evaluation-period"
             >
               <option value="monthly">Mensal</option>
               <option value="yearly">Anual</option>
-            </select>
+            </select> -->
+            </div>
           </div>
-        </div>
-      </form>
-      <div class="px-6 py-2 flex h-12 my-8 w-full gap-2">
+        </form>
+      </div>
+      <!-- <div class="px-6 py-2 flex h-12 my-8 w-full gap-2">
         <button
           form="investiment-form"
           id="calculate-results"
@@ -116,10 +127,15 @@
         >
           Limpar
         </button>
-      </div>
+      </div> -->
+
+      <p class="text-wrap text-xs px-6 py-2 t">
+        Cálculos baseados em juros compostos mensais equivalentes. Impostos e
+        taxas não são considerados.
+      </p>
     </aside>
     <main class="row-span-2 col-span-2 relative">
-      <button
+      <!-- <button
         id="slide-arrow-previous"
         class="absolute top-0 bottom-0 left-0 text-5xl cursor-pointer bg-slate-200 opacity-50 w-8 hover:opacity-100 focus:opacity-100"
       >
@@ -130,8 +146,8 @@
         class="absolute top-0 bottom-0 right-0 text-5xl cursor-pointer bg-slate-200 opacity-50 w-8 hover:opacity-100 focus:opacity-100"
       >
         &#8250;
-      </button>
-      <div
+      </button> -->
+      <!-- <div
         id="carousel"
         class="h-full w-full flex overflow-x-auto scroll-smooth"
       >
@@ -155,7 +171,7 @@
             class="w-full max-h-full border border-separate"
           ></table>
         </section>
-      </div>
+      </div> -->
     </main>
     <script type="module" src="main.js"></script>
   </body>

@@ -15,31 +15,34 @@ const columnsArray = [
   {
     columnLabel: "Total sem aporte",
     accessor: "previousInvestedAmount",
-    format: (numberInfo) => formatCurrency(numberInfo),
+    format: (numberInfo) => formatCurrencyToTable(numberInfo),
   },
   {
     columnLabel: "Total com aporte",
     accessor: "investedAmount",
-    format: (numberInfo) => formatCurrency(numberInfo),
+    format: (numberInfo) => formatCurrencyToTable(numberInfo),
   },
   {
     columnLabel: "Aportes Mensais",
     accessor: "monthlyContribution",
-    format: (numberInfo) => formatCurrency(numberInfo),
+    format: (numberInfo) => formatCurrencyToTable(numberInfo),
   },
   {
     columnLabel: "Rendimento Mensal",
     accessor: "interestReturn",
-    format: (numberInfo) => formatCurrency(numberInfo),
+    format: (numberInfo) => formatCurrencyToTable(numberInfo),
   },
   {
     columnLabel: "Quantia Total",
     accessor: "totalAmount",
-    format: (numberInfo) => formatCurrency(numberInfo),
+    format: (numberInfo) => formatCurrencyToTable(numberInfo),
   },
 ];
-function formatCurrency(value) {
+function formatCurrencyToTable(value) {
   return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+}
+function formatCurrencyToGraph(value) {
+  return value.toFixed(1);
 }
 function renderProgression(evt) {
   evt.preventDefault();
@@ -70,77 +73,77 @@ function renderProgression(evt) {
     evaluationPeriod,
   );
 
-  //   const finalInvestimentObject = returnsArray[returnsArray.length - 1];
-  //   // console.log(returnsArray);
-  //   doughnutChartReference = new Chart(finalMoneyChart, {
-  //     type: "doughnut",
-  //     data: {
-  //       labels: ["Meu investimento", "Rendimento"],
-  //       datasets: [
-  //         {
-  //           data: [
-  //             finalInvestimentObject.investedAmount,
-  //             finalInvestimentObject.totalInterestReturns,
-  //           ],
-  //           borderWidth: 2,
-  //         },
-  //       ],
-  //     },
-  //     options: {
-  //       responsive: true,
-  //       maintainAspectRatio: false,
-  //       scales: {
-  //         y: {
-  //           beginAtZero: true,
-  //         },
-  //       },
-  //     },
-  //   });
-  //   progressionChartReference = new Chart(progressionChart, {
-  //     type: "bar",
-  //     data: {
-  //       labels: returnsArray.map((investimentObject) => investimentObject.month),
-  //       datasets: [
-  //         {
-  //           label: "Total investido",
-  //           data: returnsArray.map((item) => item.previousInvestedAmount),
-  //           backgroundColor: "#3D95D3",
-  //           pointRadius: 0,
-  //           hoverRadius: 5,
-  //           tension: 0.3,
-  //         },
-  //         {
-  //           label: "Aporte mensal",
-  //           data: returnsArray.map((item) => item.monthlyContribution),
-  //           backgroundColor: "#e6cb52",
-  //           pointRadius: 0,
-  //           hoverRadius: 5,
-  //           tension: 0.3,
-  //         },
-  //         {
-  //           label: "Rendimento",
-  //           data: returnsArray.map((item) => item.totalInterestReturns),
-  //           backgroundColor: "#FF4569",
-  //           pointRadius: 0,
-  //           hoverRadius: 5,
-  //           tension: 0.3,
-  //         },
-  //       ],
-  //     },
-  //     options: {
-  //       responsive: true,
-  //       maintainAspectRatio: false,
-  //       scales: {
-  //         x: {
-  //           stacked: true,
-  //         },
-  //         y: {
-  //           stacked: true,
-  //           beginAtZero: true,
-  //         },
-  //       },
-  //     },
-  //   });
+  const finalInvestimentObject = returnsArray[returnsArray.length - 1];
+  // console.log(returnsArray);
+  doughnutChartReference = new Chart(finalMoneyChart, {
+    type: "doughnut",
+    data: {
+      labels: ["Meu investimento", "Rendimento"],
+      datasets: [
+        {
+          data: [
+            finalInvestimentObject.investedAmount,
+            finalInvestimentObject.totalInterestReturns,
+          ],
+          borderWidth: 2,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+  progressionChartReference = new Chart(progressionChart, {
+    type: "bar",
+    data: {
+      labels: returnsArray.map((investimentObject) => investimentObject.month),
+      datasets: [
+        {
+          label: "Total investido",
+          data: returnsArray.map((item) => item.previousInvestedAmount),
+          backgroundColor: "#3D95D3",
+          pointRadius: 0,
+          hoverRadius: 5,
+          tension: 0.3,
+        },
+        {
+          label: "Aporte mensal",
+          data: returnsArray.map((item) => item.monthlyContribution),
+          backgroundColor: "#e6cb52",
+          pointRadius: 0,
+          hoverRadius: 5,
+          tension: 0.3,
+        },
+        {
+          label: "Rendimento",
+          data: returnsArray.map((item) => item.totalInterestReturns),
+          backgroundColor: "#FF4569",
+          pointRadius: 0,
+          hoverRadius: 5,
+          tension: 0.3,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          stacked: true,
+        },
+        y: {
+          stacked: true,
+          beginAtZero: true,
+        },
+      },
+    },
+  });
   createTable(columnsArray, returnsArray, "results-table");
 }
 function isObjectEmpty(obj) {
@@ -202,5 +205,16 @@ for (const formElement of form) {
   }
 }
 
+const mainEl = document.querySelector("main");
+const carouselEl = document.getElementById("carousel");
+const nextButton = document.getElementById("slide-arrow-next");
+const previousButton = document.getElementById("slide-arrow-previous");
+
+nextButton.addEventListener("click", () => {
+  carouselEl.scrollLeft += mainEl.clientWidth;
+});
+previousButton.addEventListener("click", () => {
+  carouselEl.scrollLeft -= mainEl.clientWidth;
+});
 form.addEventListener("submit", renderProgression);
 clearButton.addEventListener("click", clearForm);

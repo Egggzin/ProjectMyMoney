@@ -6,22 +6,18 @@ export function calculateRequiredContribution(
   goalFinancial = 0,
   startingAmount = 0,
   timeHorizon = 0,
-  timePeriod = "monthly",
+  // timePeriod = "monthly",
   returnRate = 0,
-  returnTimeFrame = "monthly",
+  // returnTimeFrame = "monthly",
 ) {
   if (!goalFinancial || !timeHorizon || !returnRate) {
     throw new Error(
       "Meta financeira, prazo e rentabilidade devem ser preenchidos",
     );
   }
-  const monthlyRate =
-    returnTimeFrame === "monthly"
-      ? returnRate / 100
-      : convertToMontlyReturnRate(1 + returnRate / 100) - 1;
+  const monthlyRate = convertToMontlyReturnRate(1 + returnRate / 100) - 1;
 
-  const finalTimeMonth =
-    timePeriod === "monthly" ? timeHorizon : timeHorizon * 12;
+  const finalTimeMonth = timeHorizon * 12;
 
   const referenceInvestimentObject = {
     previousInvestedAmount: startingAmount,

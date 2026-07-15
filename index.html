@@ -4,16 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="/src/style.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Limelight&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@700&family=Syne+Mono&display=swap"
+      rel="stylesheet"
+    />
     <title>Calculadora de metas</title>
   </head>
-  <body class="h-[100dvh] grid grid-cols-4 grid-rows-2">
+  <body class="h-[100dvh] grid grid-cols-4 grid-rows-2 font-sans">
     <aside
-      class="px-2 py-5 justify-between flex flex-col bg-gray-100 row-span-2 border border-gray-300"
+      class="px-2 py-5 justify-between flex flex-col bg-gray-100 row-span-2 border border-gray-300 min-w-3xs"
     >
-      <div class="flex flex-col gap-5">
+      <div class="flex flex-col gap-5 capitalize md:uppercase text-sm">
         <div class="flex flex-col px-1">
           <img
-            src="public/logo.icon.png"
+            src="/logo.icon.png"
             alt="Logo Calculadora de metas"
             class="size-20 object-contain pc"
           />
@@ -21,7 +27,9 @@
         </div>
         <form id="investiment-form" class="w-full px-6">
           <div class="flex w-full flex-col my-2">
-            <label for="goal-financial" class="font-bold text-gray-500"
+            <label
+              for="goal-financial"
+              class="font-bold text-gray-500 inline-block whitespace-nowrap"
               >Meta Final (R$)</label
             >
             <div class="flex">
@@ -42,7 +50,9 @@
             </div>
           </div>
           <div class="flex w-full flex-col my-2">
-            <label for="initial-investment" class="font-bold text-gray-500"
+            <label
+              for="initial-investment"
+              class="font-bold text-gray-500 inline-block whitespace-nowrap"
               >Aporte Inicial (R$)</label
             >
             <div class="flex w-full">
@@ -57,19 +67,22 @@
                 class="h-10 w-full bg-white rounded-lg px-2"
                 id="initial-investment"
                 name="initial-investment"
+                required
                 placeholder="0.00"
               />
             </div>
           </div>
-          <div class="flex w-full my-2 justify-between">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-1">
             <div class="flex flex-col">
-              <label for="time-amount" class="font-bold text-gray-500"
+              <label
+                for="time-amount"
+                class="font-bold text-gray-500 inline-block whitespace-nowrap"
                 >Prazo (Anos)</label
               >
               <div class="flex w-full">
                 <input
                   type="text "
-                  class="h-10 bg-white rounded-lg px-2"
+                  class="h-10 w-full bg-white rounded-lg px-2"
                   id="time-amount"
                   name="time-amount"
                   required
@@ -84,7 +97,8 @@
               </div>
             </div>
             <div class="flex flex-col">
-              <label for="return-rate" class="font-bold text-gray-500"
+              <label
+                class="font-bold text-gray-500 inline-block whitespace-nowrap"
                 >Juros (% A.A.)</label
               >
               <div class="flex w-full">
@@ -96,7 +110,7 @@
             /> -->
                 <input
                   type="text"
-                  class="h-10 bg-white rounded-lg px-2"
+                  class="h-10 w-full bg-white rounded-lg px-2"
                   id="return-rate"
                   name="return-rate"
                   required
@@ -112,29 +126,30 @@
             </div>
           </div>
         </form>
+        <div class="px-6 py-2 flex flex-col my-8 w-full gap-2">
+          <button
+            form="investiment-form"
+            id="calculate-results"
+            class="w-full h-10 rounded-lg bg-gray-300 text-gray-150 hover:bg-gray-400 cursor-pointer font-semibold md:uppercase"
+          >
+            Calcular
+          </button>
+          <button
+            id="clearButton"
+            class="w-full h-10 rounded-lg text-gray-100 bg-gray-200 hover:bg-gray-300 cursor-pointer font-semibold md:uppercase"
+          >
+            Limpar
+          </button>
+        </div>
       </div>
-      <!-- <div class="px-6 py-2 flex h-12 my-8 w-full gap-2">
-        <button
-          form="investiment-form"
-          id="calculate-results"
-          class="w-1/2 rounded-lg bg-violet-300 text-violet-950 hover:text-violet-950 hover:bg-violet-200 cursor-pointer"
-        >
-          Calcular
-        </button>
-        <button
-          id="clearButton"
-          class="w-1/2 rounded-lg hover:bg-violet-300 text-violet-300 hover:text-violet-950 cursor-pointer"
-        >
-          Limpar
-        </button>
-      </div> -->
 
-      <p class="text-wrap text-xs px-6 py-2 t">
+      <p class="text-wrap text-xs px-6 py-2 text-center">
         Cálculos baseados em juros compostos mensais equivalentes. Impostos e
         taxas não são considerados.
       </p>
     </aside>
     <main class="row-span-2 col-span-2 relative">
+      <section id="container-info" class="h-full basis-full shrink-0"></section>
       <!-- <button
         id="slide-arrow-previous"
         class="absolute top-0 bottom-0 left-0 text-5xl cursor-pointer bg-slate-200 opacity-50 w-8 hover:opacity-100 focus:opacity-100"
@@ -147,7 +162,7 @@
       >
         &#8250;
       </button> -->
-      <!-- <div
+      <div
         id="carousel"
         class="h-full w-full flex overflow-x-auto scroll-smooth"
       >
@@ -171,7 +186,7 @@
             class="w-full max-h-full border border-separate"
           ></table>
         </section>
-      </div> -->
+      </div>
     </main>
     <script type="module" src="main.js"></script>
   </body>

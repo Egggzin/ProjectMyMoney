@@ -5,20 +5,20 @@ import { createTable } from "./src/table.js";
 const finalMoneyChart = document.getElementById("final-money-distribution");
 const progressionChart = document.getElementById("progression");
 const form = document.getElementById("investiment-form");
-const clearButton = document.getElementById("clearButton");
+// const clearButton = document.getElementById("clearButton");
 
 let doughnutChartReference = {};
 let progressionChartReference = {};
 
 const columnsArray = [
-  { columnLabel: "Mês", accessor: "month" },
+  { columnLabel: "Periodo", accessor: "month" },
   {
     columnLabel: "Total sem aporte",
     accessor: "previousInvestedAmount",
     format: (numberInfo) => formatCurrencyToTable(numberInfo),
   },
   {
-    columnLabel: "Total com aporte",
+    columnLabel: "Aporte",
     accessor: "investedAmount",
     format: (numberInfo) => formatCurrencyToTable(numberInfo),
   },
@@ -28,12 +28,12 @@ const columnsArray = [
     format: (numberInfo) => formatCurrencyToTable(numberInfo),
   },
   {
-    columnLabel: "Rendimento Mensal",
+    columnLabel: "Juros Total",
     accessor: "interestReturn",
     format: (numberInfo) => formatCurrencyToTable(numberInfo),
   },
   {
-    columnLabel: "Quantia Total",
+    columnLabel: "Saldo Total",
     accessor: "totalAmount",
     format: (numberInfo) => formatCurrencyToTable(numberInfo),
   },
@@ -45,8 +45,7 @@ function formatCurrencyToGraph(value) {
   return value.toFixed(1);
 }
 function renderProgression(evt) {
-  evt.preventDefault();
-
+  evt.preventDefault(evt);
   if (document.querySelector(".error")) {
     return;
   }
@@ -58,19 +57,19 @@ function renderProgression(evt) {
     document.getElementById("goal-financial").value.replace(",", "."),
   );
   const timeAmount = Number(document.getElementById("time-amount").value);
-  const timeAmountPeriod = document.getElementById("time-amount-period").value;
+  // const timeAmountPeriod = document.getElementById("time-amount-period").value;
   const returnRate = Number(
     document.getElementById("return-rate").value.replace(",", "."),
   );
-  const evaluationPeriod = document.getElementById("evaluation-period").value;
+  // const evaluationPeriod = document.getElementById("evaluation-period").value;
 
   const returnsArray = calculateRequiredContribution(
     goalFinancial,
     startingAmount,
     timeAmount,
-    timeAmountPeriod,
+    // timeAmountPeriod,
     returnRate,
-    evaluationPeriod,
+    // evaluationPeriod,
   );
 
   const finalInvestimentObject = returnsArray[returnsArray.length - 1];
@@ -210,11 +209,11 @@ const carouselEl = document.getElementById("carousel");
 const nextButton = document.getElementById("slide-arrow-next");
 const previousButton = document.getElementById("slide-arrow-previous");
 
-nextButton.addEventListener("click", () => {
-  carouselEl.scrollLeft += mainEl.clientWidth;
-});
-previousButton.addEventListener("click", () => {
-  carouselEl.scrollLeft -= mainEl.clientWidth;
-});
-form.addEventListener("submit", renderProgression);
+// nextButton.addEventListener("click", () => {
+//   carouselEl.scrollLeft += mainEl.clientWidth;
+// });
+// previousButton.addEventListener("click", () => {
+//   carouselEl.scrollLeft -= mainEl.clientWidth;
+// });
+form.addEventListener("click", renderProgression);
 clearButton.addEventListener("click", clearForm);

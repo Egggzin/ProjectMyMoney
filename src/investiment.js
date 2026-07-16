@@ -1,3 +1,5 @@
+// import { createServerModuleRunnerTransport } from "vite";
+
 function convertToMontlyReturnRate(yearlyReturnRate) {
   return yearlyReturnRate ** (1 / 12);
 }
@@ -6,9 +8,7 @@ export function calculateRequiredContribution(
   goalFinancial = 0,
   startingAmount = 0,
   timeHorizon = 0,
-  // timePeriod = "monthly",
   returnRate = 0,
-  // returnTimeFrame = "monthly",
 ) {
   if (!goalFinancial || !timeHorizon || !returnRate) {
     throw new Error(
@@ -56,6 +56,7 @@ export function calculateRequiredContribution(
       previousMonth.totalAmount + interestReturn + monthlyContribution;
 
     returnsArray.push({
+      startingAmount: Number(startingAmount.toFixed(2)),
       previousInvestedAmount: Number(previousInvestedAmount.toFixed(2)),
       investedAmount: Number(investedAmount.toFixed(2)),
       monthlyContribution: Number(monthlyContribution.toFixed(2)),

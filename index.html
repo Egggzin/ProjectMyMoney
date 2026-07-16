@@ -19,7 +19,7 @@
       <div class="flex flex-col gap-5 capitalize md:uppercase text-sm">
         <div class="flex flex-col px-1">
           <img
-            src="/logo.icon.png"
+            src="logo.icon.png"
             alt="Logo Calculadora de metas"
             class="size-20 object-contain pc"
           />
@@ -33,12 +33,6 @@
               >Meta Final (R$)</label
             >
             <div class="flex">
-              <!-- <input
-              value="R$"
-              class="w-1/6 bg-violet-300 text-center rounded-l-lg"
-              type="text"
-              disabled
-            /> -->
               <input
                 type="text"
                 class="h-10 w-full bg-white rounded-lg px-2"
@@ -56,12 +50,6 @@
               >Aporte Inicial (R$)</label
             >
             <div class="flex w-full">
-              <!-- <input
-              value="R$"
-              class="w-1/6 bg-violet-300 text-center rounded-l-lg"
-              type="text"
-              disabled
-            /> -->
               <input
                 type="text"
                 class="h-10 w-full bg-white rounded-lg px-2"
@@ -87,13 +75,6 @@
                   name="time-amount"
                   required
                 />
-                <!-- <select
-              class="w-1/3 bg-white text-center border-violet-950 border-l-2 rounded-r-lg hover:bg-violet-300 hover:text-violet-950 cursor-pointer"
-              id="time-amount-period"
-            >
-              <option value="monthly">Mensal</option>
-              <option value="yearly">Anual</option>
-            </select> -->
               </div>
             </div>
             <div class="flex flex-col">
@@ -102,12 +83,6 @@
                 >Juros (% A.A.)</label
               >
               <div class="flex w-full">
-                <!-- <input
-              value="%"
-              class="w-1/6 bg-violet-300 text-center rounded-l-lg"
-              type="text"
-              disabled
-            /> -->
                 <input
                   type="text"
                   class="h-10 w-full bg-white rounded-lg px-2"
@@ -116,13 +91,6 @@
                   required
                 />
               </div>
-              <!-- <select
-              class="w-1/3 bg-white text-center border-violet-950 border-l-2 rounded-r-lg hover:bg-violet-300 hover:text-violet-950 cursor-pointer"
-              id="evaluation-period"
-            >
-              <option value="monthly">Mensal</option>
-              <option value="yearly">Anual</option>
-            </select> -->
             </div>
           </div>
         </form>
@@ -148,46 +116,41 @@
         taxas não são considerados.
       </p>
     </aside>
-    <main class="row-span-2 col-span-2 relative">
-      <section id="container-info" class="h-full basis-full shrink-0"></section>
-      <!-- <button
-        id="slide-arrow-previous"
-        class="absolute top-0 bottom-0 left-0 text-5xl cursor-pointer bg-slate-200 opacity-50 w-8 hover:opacity-100 focus:opacity-100"
-      >
-        &#8249;
-      </button>
-      <button
-        id="slide-arrow-next"
-        class="absolute top-0 bottom-0 right-0 text-5xl cursor-pointer bg-slate-200 opacity-50 w-8 hover:opacity-100 focus:opacity-100"
-      >
-        &#8250;
-      </button> -->
-      <div
-        id="carousel"
-        class="h-full w-full flex overflow-x-auto scroll-smooth"
-      >
-        <section id="charts-container" class="h-full basis-full shrink-0">
-          <div class="h-[36%] flex flex-col items-center pb-10">
-            <p class="font-bold text-lg">Resultado Final</p>
+    <main class="row-span-2 col-span-2 relative px-10">
+      <section id="container-info" class=""></section>
+      <div id="carousel" class="flex flex-col w-full flex">
+        <section id="charts-container" class="h-full basis-full flex gap-5">
+          <div
+            class="flex w-1/2 flex-col pt-3 pb-10 inline-block h-full max-h-[300px]"
+          >
+            <p
+              class="font-bold text-lg uppercase border-b-4 border-gray-300 text-sm pb-1"
+            >
+              Composição de Patrimônio
+            </p>
             <canvas id="final-money-distribution"></canvas>
           </div>
-          <div class="h-[56%] flex flex-col items-center">
-            <p class="font-bold text-lg">Progressão</p>
+          <div
+            class="flex w-1/2 flex-col pt-3 pb-10 inline-block h-full max-h-[300px]"
+          >
+            <p
+              class="font-bold text-sm text-lg uppercase border-b-4 border-gray-300 pb-1"
+            >
+              Evolução Temporal
+            </p>
             <canvas id="progression"></canvas>
           </div>
         </section>
-        <section
-          id="table-container"
-          class="h-full overflow-y-auto basis-full shrink-0"
-        >
-          <p class="font-bold text-lg text-center">Resultados Mensais</p>
-          <table
-            id="results-table"
-            class="w-full max-h-full border border-separate"
-          ></table>
+        <section id="table-container" class="h-full max-h-[300px]">
+          <p
+            class="font-bold text-lg uppercase border-b-4 border-gray-300 text-sm pb-1"
+          >
+            Projeção Detalhada (Mensal)
+          </p>
+          <table id="results-table" class="w-full max-h-full"></table>
         </section>
       </div>
     </main>
-    <script type="module" src="main.js"></script>
+    <script type="module" src="/main.js"></script>
   </body>
 </html>

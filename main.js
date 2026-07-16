@@ -5,7 +5,7 @@ import { createTable } from "./src/table.js";
 const finalMoneyChart = document.getElementById("final-money-distribution");
 const progressionChart = document.getElementById("progression");
 const form = document.getElementById("investiment-form");
-// const clearButton = document.getElementById("clearButton");
+const clearButton = document.getElementById("clearButton");
 
 let doughnutChartReference = {};
 let progressionChartReference = {};
@@ -13,13 +13,8 @@ let progressionChartReference = {};
 const columnsArray = [
   { columnLabel: "Periodo", accessor: "month" },
   {
-    columnLabel: "Total sem aporte",
+    columnLabel: "aporte",
     accessor: "previousInvestedAmount",
-    format: (numberInfo) => formatCurrencyToTable(numberInfo),
-  },
-  {
-    columnLabel: "Aporte",
-    accessor: "investedAmount",
     format: (numberInfo) => formatCurrencyToTable(numberInfo),
   },
   {
@@ -28,8 +23,13 @@ const columnsArray = [
     format: (numberInfo) => formatCurrencyToTable(numberInfo),
   },
   {
-    columnLabel: "Juros Total",
+    columnLabel: "Juros Mensais",
     accessor: "interestReturn",
+    format: (numberInfo) => formatCurrencyToTable(numberInfo),
+  },
+  {
+    columnLabel: "Total Juros",
+    accessor: "totalInterestReturns",
     format: (numberInfo) => formatCurrencyToTable(numberInfo),
   },
   {
@@ -45,10 +45,12 @@ function formatCurrencyToGraph(value) {
   return value.toFixed(1);
 }
 function renderProgression(evt) {
-  evt.preventDefault(evt);
+  evt.preventDefault();
+
   if (document.querySelector(".error")) {
     return;
   }
+
   resetCharts();
   const startingAmount = Number(
     document.getElementById("initial-investment").value.replace(",", "."),
@@ -67,9 +69,7 @@ function renderProgression(evt) {
     goalFinancial,
     startingAmount,
     timeAmount,
-    // timeAmountPeriod,
     returnRate,
-    // evaluationPeriod,
   );
 
   const finalInvestimentObject = returnsArray[returnsArray.length - 1];
@@ -77,23 +77,41 @@ function renderProgression(evt) {
   doughnutChartReference = new Chart(finalMoneyChart, {
     type: "doughnut",
     data: {
-      labels: ["Meu investimento", "Rendimento"],
+      labels: ["Aporte Inicial", "Aportes Mensais", "Juros Acumulados"],
       datasets: [
         {
           data: [
+            finalInvestimentObject.startingAmount,
             finalInvestimentObject.investedAmount,
             finalInvestimentObject.totalInterestReturns,
           ],
-          borderWidth: 2,
+          backgroundColor: ["#74777c", "#101114", "#315efb"],
+
+          borderColor: "#f8f5ef",
+          borderWidth: 3,
+          hoverOffset: 4,
         },
       ],
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: true,
+      cutout: "58%",
+
+      layout: {
+        padding: 10,
+      },
+      plugins: {
+        legend: {
+          display: true,
+          position: "right",
+          align: "center",
+
+          labels: {
+            boxWidth: 14,
+            boxHeight: 14,
+            padding: 15,
+          },
         },
       },
     },
@@ -209,11 +227,5 @@ const carouselEl = document.getElementById("carousel");
 const nextButton = document.getElementById("slide-arrow-next");
 const previousButton = document.getElementById("slide-arrow-previous");
 
-// nextButton.addEventListener("click", () => {
-//   carouselEl.scrollLeft += mainEl.clientWidth;
-// });
-// previousButton.addEventListener("click", () => {
-//   carouselEl.scrollLeft -= mainEl.clientWidth;
-// });
-form.addEventListener("click", renderProgression);
+form.addEventListener("submit", renderProgression);
 clearButton.addEventListener("click", clearForm);

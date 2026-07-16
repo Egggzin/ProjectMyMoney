@@ -71,7 +71,9 @@ function renderProgression(evt) {
     timeAmount,
     returnRate,
   );
-
+  const yearlyReturns = returnsArray.filter(
+    (item) => item.month === 0 || item.month % 12 === 0,
+  );
   const finalInvestimentObject = returnsArray[returnsArray.length - 1];
   // console.log(returnsArray);
   doughnutChartReference = new Chart(finalMoneyChart, {
@@ -118,45 +120,131 @@ function renderProgression(evt) {
   });
   progressionChartReference = new Chart(progressionChart, {
     type: "bar",
+
     data: {
-      labels: returnsArray.map((investimentObject) => investimentObject.month),
+      labels: yearlyReturns.map((item) =>
+        item.month === 0 ? "Início" : `Ano ${item.month / 12}`,
+      ),
+
       datasets: [
         {
           label: "Total investido",
-          data: returnsArray.map((item) => item.previousInvestedAmount),
-          backgroundColor: "#3D95D3",
-          pointRadius: 0,
-          hoverRadius: 5,
-          tension: 0.3,
+          data: yearlyReturns.map((item) => item.previousInvestedAmount),
+          backgroundColor: "#74777c",
+          borderRadius: 3,
+          borderSkipped: false,
+          barPercentage: 0.85,
+          categoryPercentage: 0.9,
         },
         {
-          label: "Aporte mensal",
-          data: returnsArray.map((item) => item.monthlyContribution),
-          backgroundColor: "#e6cb52",
-          pointRadius: 0,
-          hoverRadius: 5,
-          tension: 0.3,
+          label: "Aporte do último mês",
+          data: yearlyReturns.map((item) => item.monthlyContribution),
+          backgroundColor: "#101114",
+          borderRadius: 3,
+          borderSkipped: false,
+          barPercentage: 0.85,
+          categoryPercentage: 0.9,
         },
         {
-          label: "Rendimento",
-          data: returnsArray.map((item) => item.totalInterestReturns),
-          backgroundColor: "#FF4569",
-          pointRadius: 0,
-          hoverRadius: 5,
-          tension: 0.3,
+          label: "Juros acumulados",
+          data: yearlyReturns.map((item) => item.totalInterestReturns),
+          backgroundColor: "#315efb",
+          borderRadius: 3,
+          borderSkipped: false,
+          barPercentage: 0.85,
+          categoryPercentage: 0.9,
         },
       ],
     },
+
     options: {
       responsive: true,
       maintainAspectRatio: false,
+
+      interaction: {
+        mode: "index",
+        intersect: false,
+      },
+
+      plugins: {
+        legend: {
+          position: "top",
+          align: "start",
+
+          labels: {
+            boxWidth: 28,
+            boxHeight: 10,
+            padding: 12,
+            color: "#6b7280",
+          },
+        },
+
+        tooltip: {
+          callbacks: {
+            label(context) {
+              return `${context.dataset.label}: ${formatCurrencyToTable(
+                context.raw,
+              )}`;
+            },
+          },
+        },
+      },
+
       scales: {
         x: {
           stacked: true,
+
+          grid: {
+            display: false,
+          },
+
+          border: {
+            display: false,
+          },
+
+          ticks: {
+            color: "#6b7280",
+            maxRotation: 0,
+            autoSkip: true,
+            maxTicksLimit: 8,
+
+            callback(value, index) {
+              const month = returnsArray[index]?.month;
+
+              if (month === 0) {
+                return "Início";
+              }
+
+              if (month % 12 === 0) {
+                return `Ano ${month / 12}`;
+              }
+
+              return "";
+            },
+          },
         },
+
         y: {
           stacked: true,
           beginAtZero: true,
+
+          border: {
+            display: false,
+          },
+
+          grid: {
+            color: "#e5e7eb",
+            drawTicks: false,
+          },
+
+          ticks: {
+            color: "#6b7280",
+            padding: 10,
+
+            // callback(value) {
+            //   return formatCompactCurrency(value);
+            // },
+          },
         },
       },
     },

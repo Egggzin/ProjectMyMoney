@@ -12,7 +12,9 @@
     />
     <title>Calculadora de metas</title>
   </head>
-  <body class="h-[100dvh] grid grid-cols-4 grid-rows-2 font-sans">
+  <body
+    class="overflow-hidden h-[100dvh] grid grid-cols-4 grid-rows-2 font-sans"
+  >
     <aside
       class="px-2 py-5 justify-between flex flex-col bg-gray-100 row-span-2 border border-gray-300 min-w-3xs"
     >
@@ -116,15 +118,18 @@
         taxas não são considerados.
       </p>
     </aside>
-    <main class="row-span-2 col-span-2 relative px-10">
+    <main class="row-span-2 col-span-2 relative px-10 overflow-hidden">
       <section id="container-info" class=""></section>
-      <div id="carousel" class="flex flex-col w-full flex">
+      <div
+        id="carousel"
+        class="h-full flex flex-col min-h-0 w-full flex overflow-y-hidden"
+      >
         <section id="charts-container" class="h-full basis-full flex gap-5">
           <div
             class="flex w-1/2 flex-col pt-3 pb-10 inline-block h-full max-h-[300px]"
           >
             <p
-              class="font-bold text-lg uppercase border-b-4 border-gray-300 text-sm pb-1"
+              class="font-bold text-lg uppercase border-b-1 border-gray-300 text-sm pb-1"
             >
               Composição de Patrimônio
             </p>
@@ -134,20 +139,23 @@
             class="flex w-1/2 flex-col pt-3 pb-10 inline-block h-full max-h-[300px]"
           >
             <p
-              class="font-bold text-sm text-lg uppercase border-b-4 border-gray-300 pb-1"
+              class="font-bold text-sm text-lg uppercase border-b-1 border-gray-300 pb-1"
             >
               Evolução Temporal
             </p>
             <canvas id="progression"></canvas>
           </div>
         </section>
-        <section id="table-container" class="h-full max-h-[300px]">
+        <section
+          id="table-container"
+          class="h-full min-h-0 overflow-y-auto basis-full shrink-0"
+        >
           <p
-            class="font-bold text-lg uppercase border-b-4 border-gray-300 text-sm pb-1"
+            class="font-bold text-lg uppercase border-b-1 border-gray-300 text-sm pb-1"
           >
             Projeção Detalhada (Mensal)
           </p>
-          <table id="results-table" class="w-full max-h-full"></table>
+          <table id="results-table" class="w-full border-collapse"></table>
         </section>
       </div>
     </main>

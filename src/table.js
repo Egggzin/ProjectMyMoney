@@ -29,9 +29,14 @@ function createTableHeader(tableReference, columsArray) {
     tableReference.querySelector("thead") ?? createTheadElement(tableReference);
   tableHeaderReference.innerHTML = "";
   const headerRow = document.createElement("tr");
-  ["text-gray-400", "sticky", "top-0", "text-xs", "uppercase"].forEach(
-    (cssClass) => headerRow.classList.add(cssClass),
-  );
+  [
+    "text-gray-400",
+    "sticky",
+    "top-0",
+    "text-xs",
+    "uppercase",
+    "bg-withe",
+  ].forEach((cssClass) => headerRow.classList.add(cssClass));
   for (const tableColumnObject of columsArray) {
     const headerElement = /* html */ `<th class="text-center px-7 py-5 " >${tableColumnObject.columnLabel}</th>`;
     headerRow.innerHTML += headerElement;

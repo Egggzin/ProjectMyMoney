@@ -118,13 +118,12 @@
         taxas não são considerados.
       </p>
     </aside>
-    <main class="row-span-2 col-span-2 relative px-10 overflow-hidden">
+    <main
+      class="row-span-2 col-span-2 flex flex-col h-full min-h-0 px-10 overflow-hidden"
+    >
       <section id="container-info" class=""></section>
-      <div
-        id="carousel"
-        class="h-full flex flex-col min-h-0 w-full flex overflow-y-hidden"
-      >
-        <section id="charts-container" class="h-full basis-full flex gap-5">
+      <div id="carousel" class="flex-1 min-h-0 flex flex-col overflow-hidden">
+        <section id="charts-container" class="shrink-0 h-[320px] flex gap-5">
           <div
             class="flex w-1/2 flex-col pt-3 pb-10 inline-block h-full max-h-[300px]"
           >
@@ -146,16 +145,18 @@
             <canvas id="progression"></canvas>
           </div>
         </section>
-        <section
-          id="table-container"
-          class="h-full min-h-0 overflow-y-auto basis-full shrink-0"
-        >
+        <section id="table-container" class="flex-1 min-h-0 flex flex-col">
           <p
-            class="font-bold text-lg uppercase border-b-1 border-gray-300 text-sm pb-1"
+            class="shrink-0 bg-white z-20 font-bold uppercase border-b border-gray-300 text-sm py-3"
           >
             Projeção Detalhada (Mensal)
           </p>
-          <table id="results-table" class="w-full border-collapse"></table>
+          <div class="flex-1 min-h-0 overflow-y-auto">
+            <table
+              id="results-table"
+              class="w-full table-fixed border-collapse"
+            ></table>
+          </div>
         </section>
       </div>
     </main>

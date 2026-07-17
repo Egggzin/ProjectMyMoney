@@ -136,15 +136,15 @@ function renderProgression(evt) {
           barPercentage: 0.85,
           categoryPercentage: 0.9,
         },
-        {
-          label: "Aporte do último mês",
-          data: yearlyReturns.map((item) => item.monthlyContribution),
-          backgroundColor: "#101114",
-          borderRadius: 3,
-          borderSkipped: false,
-          barPercentage: 0.85,
-          categoryPercentage: 0.9,
-        },
+        // {
+        //   label: "Aporte do último mês",
+        //   data: yearlyReturns.map((item) => item.monthlyContribution),
+        //   backgroundColor: "#101114",
+        //   borderRadius: 3,
+        //   borderSkipped: false,
+        //   barPercentage: 0.85,
+        //   categoryPercentage: 0.9,
+        // },
         {
           label: "Juros acumulados",
           data: yearlyReturns.map((item) => item.totalInterestReturns),
@@ -168,7 +168,7 @@ function renderProgression(evt) {
 
       plugins: {
         legend: {
-          position: "top",
+          position: "center",
           align: "start",
 
           labels: {

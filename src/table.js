@@ -30,15 +30,22 @@ function createTableHeader(tableReference, columsArray) {
   tableHeaderReference.innerHTML = "";
   const headerRow = document.createElement("tr");
   [
-    "text-gray-400",
     "sticky",
     "top-0",
+    "z-10",
+    "bg-white",
+    "px-6",
+    "py-5",
+    "text-center",
     "text-xs",
+    "font-bold",
     "uppercase",
-    "bg-withe",
+    "text-gray-400",
+    "border-b",
+    "border-gray-200",
   ].forEach((cssClass) => headerRow.classList.add(cssClass));
   for (const tableColumnObject of columsArray) {
-    const headerElement = /* html */ `<th class="text-center px-7 py-5 " >${tableColumnObject.columnLabel}</th>`;
+    const headerElement = /* html */ `<th class="text-center px-7 py-5" >${tableColumnObject.columnLabel}</th>`;
     headerRow.innerHTML += headerElement;
   }
   tableHeaderReference.appendChild(headerRow);
